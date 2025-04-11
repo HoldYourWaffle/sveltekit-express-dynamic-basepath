@@ -10,8 +10,8 @@ app.get('/healthcheck', (req, res) => {
 	res.end('ok');
 });
 
-// Delegate to SvelteKit
-app.use(handler);
+// Delegate to SvelteKit, path could be coming from anywhere
+app.use('/sveltekit', handler);
 
 app.listen(3000, () => {
 	console.log('listening on port 3000');
