@@ -10,6 +10,15 @@ app.get('/healthcheck', (req, res) => {
 	res.end('ok');
 });
 
+// Workaround for sveltejs/kit#13702
+app.all('/sveltekit', (req, res, next) => {
+	if (!req.url.endsWith('/')) {
+		res.redirect(308, '/sveltekit/');
+	} else {
+		next();
+	}
+});
+
 // Delegate to SvelteKit, path could be coming from anywhere
 app.use('/sveltekit', handler);
 
